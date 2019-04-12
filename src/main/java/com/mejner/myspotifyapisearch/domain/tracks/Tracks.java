@@ -12,7 +12,6 @@ public class Tracks {
     private List<Items> items;
     private String href;
     private int total;
-    private String next;
 
     public Tracks() {
         items = new ArrayList<>();
