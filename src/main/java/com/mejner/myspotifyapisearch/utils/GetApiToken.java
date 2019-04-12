@@ -12,8 +12,8 @@ import org.springframework.web.client.RestTemplate;
 @Component
 public class GetApiToken {
 
-    String idSecret = ApiConstants.CLIENT_ID + ":" + ApiConstants.CLIENT_SECRET;
-    String idSecretEncoded = new String(Base64.encodeBase64(idSecret.getBytes()));
+    private String idSecret = ApiConstants.CLIENT_ID + ":" + ApiConstants.CLIENT_SECRET;
+    private String idSecretEncoded = new String(Base64.encodeBase64(idSecret.getBytes()));
 
     public String getAccesToken() {
         RestTemplate restTemplate = new RestTemplate();

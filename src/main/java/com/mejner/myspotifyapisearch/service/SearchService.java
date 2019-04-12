@@ -40,7 +40,7 @@ public class SearchService {
 
         try {
             ResponseEntity<TracksSearchResult> response =
-                    restTemplate.exchange(ApiConstants.SPOTIFY_SEARCH_URL + trimName(name) + "&type=track&market=US", HttpMethod.GET,
+                    restTemplate.exchange(ApiConstants.SPOTIFY_SEARCH_URL + name + "&type=track&market=US", HttpMethod.GET,
                             entity, TracksSearchResult.class);
             log.info("status: " + response.getStatusCode());
 
@@ -79,7 +79,7 @@ public class SearchService {
 
         try {
             ResponseEntity<ArtistsSearchResult> response =
-                    restTemplate.exchange(ApiConstants.SPOTIFY_SEARCH_URL + trimName(name) + "&type=artist&market=US", HttpMethod.GET,
+                    restTemplate.exchange(ApiConstants.SPOTIFY_SEARCH_URL + name + "&type=artist&market=US", HttpMethod.GET,
                             entity, ArtistsSearchResult.class);
             log.info("status: " + response.getStatusCode());
 
