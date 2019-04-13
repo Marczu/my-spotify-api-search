@@ -5,6 +5,7 @@ import {Artists} from "./Artists";
 export class Items {
 
   constructor(
+    public id: string,
     public name: string,
     public album: Album,
     public artists: Artists[],

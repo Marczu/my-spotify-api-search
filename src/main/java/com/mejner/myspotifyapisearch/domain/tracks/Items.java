@@ -15,6 +15,7 @@ import java.util.List;
 public class Items {
 
     @Id
+    private String id;
     private String name;
     private int duration_ms;
     private Album album;

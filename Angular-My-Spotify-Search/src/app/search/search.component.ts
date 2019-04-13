@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {SearchService} from "../service/data/search.service";
 import {Items} from "../domain/tracks/Items";
 import {Artists} from "../domain/tracks/Artists";
+import {FavoritesService} from "../service/data/favorites.service";
 
 @Component({
   selector: 'app-search',
@@ -13,29 +14,11 @@ export class SearchComponent implements OnInit {
   searchResult: Items[] = null;
   tracksName: string = "";
 
-  constructor(private searchService: SearchService) {
+  constructor(private searchService: SearchService,
+              private favoritesService: FavoritesService) {
   }
 
   ngOnInit() {
-  }
-
-  getTracks() {
-    this.searchService.getTracksByName("Tori Amos").subscribe(
-      response => {
-        this.searchResult = response.items;
-        console.log(this.searchResult)
-      }
-    );
-  }
-
-  msToMinutes(ms) {
-    let seconds = Math.floor((ms / 1000) % 60);
-    let minutes = Math.floor((ms / (1000 * 60)) % 60);
-
-    let resultMinutes = (minutes < 10) ? "0" + minutes : minutes;
-    let resultSeconds = (seconds < 10) ? "0" + seconds : seconds;
-
-    return resultMinutes + ":" + resultSeconds;
   }
 
   getArtistsNames(artists: Artists[]) {
@@ -51,10 +34,6 @@ export class SearchComponent implements OnInit {
         resultNames += art.name
       } );
     }
-
-
-
-    console.log(resultNames)
     return resultNames;
   }
 
@@ -65,5 +44,20 @@ export class SearchComponent implements OnInit {
         console.log(this.searchResult)
       }
     );
+  }
+
+  addToFavorites(track: Items) {
+    console.log(track);
+    this.favoritesService.saveFavoriteTrack(track).subscribe()
+  }
+
+  msToMinutes(ms) {
+    let seconds = Math.floor((ms / 1000) % 60);
+    let minutes = Math.floor((ms / (1000 * 60)) % 60);
+
+    let resultMinutes = (minutes < 10) ? "0" + minutes : minutes;
+    let resultSeconds = (seconds < 10) ? "0" + seconds : seconds;
+
+    return resultMinutes + ":" + resultSeconds;
   }
 }

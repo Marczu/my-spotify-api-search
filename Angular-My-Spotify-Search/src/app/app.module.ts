@@ -7,12 +7,16 @@ import { ErrorComponent } from './error/error.component';
 import { SearchComponent } from './search/search.component';
 import {FormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
+import { FavoritesComponent } from './favorites/favorites.component';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ErrorComponent,
-    SearchComponent
+    SearchComponent,
+    FavoritesComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

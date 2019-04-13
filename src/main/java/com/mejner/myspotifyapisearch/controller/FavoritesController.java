@@ -1,31 +1,46 @@
 package com.mejner.myspotifyapisearch.controller;
 
 import com.mejner.myspotifyapisearch.domain.tracks.Items;
-import com.mejner.myspotifyapisearch.domain.tracks.Tracks;
-import com.mejner.myspotifyapisearch.domain.tracks.album.Images;
-import com.mejner.myspotifyapisearch.repository.FavoritesRepository;
+import com.mejner.myspotifyapisearch.service.FavoritesService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin()
+@RequestMapping("/api/favorites")
 public class FavoritesController {
 
     @Autowired
-    FavoritesRepository repository;
+    FavoritesService favoritesService;
 
-    @PostMapping("/favoritesTracks")
-    public ResponseEntity<Items> sendImages(@RequestBody Items items){
-        repository.save(items);
+    @PostMapping("/save/track")
+    public ResponseEntity<Items> saveFavoriteTrack(@RequestBody Items track){
+        favoritesService.saveFavoriteTrack(track);
 
-        repository.findAll().forEach(item -> System.out.println("Wynik to: " + item.getAlbum().getName()) );
+        favoritesService.findAllFavorites().forEach(item -> System.out.println("Wynik to: " + item.getAlbum()) );
+        return new ResponseEntity<>(track, HttpStatus.OK);
+    }
+
+    @PostMapping("/save/artist")
+    public ResponseEntity<com.mejner.myspotifyapisearch.domain.artists.Items> saveFavoriteArtist(@RequestBody com.mejner.myspotifyapisearch.domain.artists.Items items){
         return new ResponseEntity<>(items, HttpStatus.OK);
+    }
+
+    @GetMapping("/tracks")
+    public ResponseEntity<Iterable<Items>> getFavoriteTracks(){
+
+        Iterable<Items> tracks = favoritesService.findAllFavorites();
+
+        return new ResponseEntity<>(tracks, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/delete/tracks/{id}")
+    public ResponseEntity removeFavoriteById(@PathVariable String id){
+        favoritesService.removeFavoriteById(id);
+        return new ResponseEntity(HttpStatus.OK);
     }
 }

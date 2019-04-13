@@ -1,0 +1,29 @@
+<div class="container">
+  <h1 class="display-3 mt-2 mb-5">Lista ulubionych utwórów</h1>
+</div>
+
+<div class="container-fluid">
+  <div class="alert alert-success" *ngIf="message">{{message}}</div>
+  <table class="table" *ngIf="favoriteTracks">
+    <thead>
+    <tr>
+      <th>Obrazek</th>
+      <th>Tytuł</th>
+      <th>Wykonawca</th>
+      <th>Czas utworu</th>
+      <th>Ulubiony</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let result of favoriteTracks">
+      <td><img src="{{result.album.images[2].url}}"></td>
+      <td>{{result.name}}</td>
+      <td>{{getArtistsNames(result.artists)}}</td>
+      <td>{{msToMinutes(result.duration_ms)}}</td>
+      <td>
+        <button class=" btn btn-danger" (click)="removeFavoriteTrackById(result.id)">Usuń z ulubionych</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
