@@ -22,7 +22,7 @@
 
 <div class="container-fluid">
   <div class="alert alert-success" *ngIf="message">{{message}}</div>
-  <table class="table">
+  <table class="table" *ngIf="searchResult">
     <thead>
     <tr>
       <th>Tytuł</th>
