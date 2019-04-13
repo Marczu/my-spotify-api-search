@@ -5,6 +5,7 @@ export class Album {
     public release_date: string,
     public total_tracks: string,
     public name: string,
+    public type: string,
     public images: Images[]
   ) {
   }

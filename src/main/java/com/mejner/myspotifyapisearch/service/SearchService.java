@@ -44,14 +44,6 @@ public class SearchService {
                             entity, TracksSearchResult.class);
             log.info("status: " + response.getStatusCode());
 
-            /*For testing*/
-//            response.getBody().getTracks().getItems().forEach(item -> System.out.println("Tytuł to: " + item.getName() +
-//                    " Album to: " + item.getAlbum().getName() +
-//                    " Image Url: " + item.getAlbum().getImages().get(0)));
-//            response.getBody().getTracks().getItems().forEach(item -> item.getArtist().forEach(
-//                    artists -> System.out.println("Artysta to: " + artists.getName())) );
-//            response.getBody().getTracks().getItems().forEach(item -> item.getArtists().forEach(artist -> System.out.println("Artysta to :" + artist.getName())));
-
             if (response.getStatusCode().is2xxSuccessful() && response.getBody().getTracks().getItems().size() != 0) {
                 return response.getBody().getTracks();
             }
