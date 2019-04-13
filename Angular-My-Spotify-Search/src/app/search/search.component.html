@@ -1,0 +1,49 @@
+<div class="container">
+  <div class="container">
+    <h1 class="display-3">Przeszukaj utwory i artystów:</h1>
+    <form class="text-dark">
+      <div class="form-group">
+        <input type="text" class="form-control" id="tracks" name="tracks" aria-describedby="emailHelp"
+               placeholder="Wprowadź nazwe wyszukiwanego utworu" [(ngModel)]="tracksName">
+
+      </div>
+      <div class="form-group">
+        <input type="artists" class="form-control" id="artists" name="artists" placeholder="Wprowadź nazwe wyszukiwanego wykonawcy"
+               [(ngModel)]="password">
+      </div>
+      <div class="alert alert-danger small" *ngIf="invalidLogin">{{errorMessage}}</div>
+      <button type="submit" class="btn btn-primary mb-5" (click)="searchForTracks()">Wyszukaj utworów</button>
+      <button type="submit" class="btn btn-primary ml-5 mb-5" (click)="searchForArtists()">Wyszukaj Wykonawców</button>
+    </form>
+
+
+  </div>
+</div>
+
+<div class="container-fluid">
+  <div class="alert alert-success" *ngIf="message">{{message}}</div>
+  <table class="table">
+    <thead>
+    <tr>
+      <th>Tytuł</th>
+      <th>Wykonawca</th>
+      <th>Czas utworu</th>
+      <th>Obrazek</th>
+      <th>Ulubiony</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let result of searchResult">
+      <td>{{result.name}}</td>
+      <td>{{getArtistsNames(result.artists)}}</td>
+      <td>{{msToMinutes(result.duration_ms)}}</td>
+      <td><img src="{{result.album.images[2].url}}"></td>
+
+      <td>
+        <button class=" btn btn-success" (click)="addToFavorites(result)">Dodaj Do ulubionych</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
