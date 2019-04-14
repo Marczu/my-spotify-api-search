@@ -1,23 +1,24 @@
 <div class="container">
-  <h1 class="display-3 mt-2 mb-5">Lista ulubionych utwórów</h1>
+  <h1 class="display-3 mt-2 mb-5 text-center">Lista ulubionych utwórów</h1>
 </div>
 
 <div class="container-fluid">
-  <div class="alert alert-success" *ngIf="message">{{message}}</div>
-  <table class="table" *ngIf="favoriteTracks">
+  <table class="table" *ngIf="favoriteTracks.length > 0; else noFavoriteTracks">
     <thead>
     <tr>
       <th>Obrazek</th>
-      <th>Tytuł</th>
+      <th>Tytuł Utwóru</th>
+      <th>Album</th>
       <th>Wykonawca</th>
       <th>Czas utworu</th>
-      <th>Ulubiony</th>
+      <th>Usuń ulubiony utwór</th>
     </tr>
     </thead>
     <tbody>
     <tr *ngFor="let result of favoriteTracks">
       <td><img src="{{result.album.images[2].url}}"></td>
       <td>{{result.name}}</td>
+      <td>{{result.album.name}}</td>
       <td>{{getArtistsNames(result.artists)}}</td>
       <td>{{msToMinutes(result.duration_ms)}}</td>
       <td>
@@ -26,4 +27,14 @@
     </tr>
     </tbody>
   </table>
+
 </div>
+  <ng-template #noFavoriteTracks>
+    <div class="container">
+      <div class="row justify-content-center">
+        <h3 class="text-warning text-center col-12">Twoja lista ulubionych utwórów jest pusta.</h3>
+        <button (click)="goToSearch()" class="btn btn-outline-success">Dodaj ulubione utwory</button>
+      </div>
+    </div>
+  </ng-template>
+

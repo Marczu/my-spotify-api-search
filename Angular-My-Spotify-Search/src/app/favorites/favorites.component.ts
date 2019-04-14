@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FavoritesService} from "../service/data/favorites.service";
 import {Items} from "../domain/tracks/Items";
 import {Artists} from "../domain/tracks/Artists";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-favorites',
@@ -10,9 +11,10 @@ import {Artists} from "../domain/tracks/Artists";
 })
 export class FavoritesComponent implements OnInit {
 
-  favoriteTracks: Items[];
+  favoriteTracks: Items[] = [];
 
-  constructor(private favoriteService: FavoritesService) {
+  constructor(private favoriteService: FavoritesService,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -64,5 +66,9 @@ export class FavoritesComponent implements OnInit {
     let resultSeconds = (seconds < 10) ? "0" + seconds : seconds;
 
     return resultMinutes + ":" + resultSeconds;
+  }
+
+  goToSearch() {
+    this.router.navigate(['search'])
   }
 }
