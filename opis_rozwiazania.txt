@@ -5,6 +5,8 @@ Dla pobrania Tokena stworzylem do tego klase GetApiToken w ktorej wykorzysta³em 
 Klasa SearchService w pakiecie service wykorzystuje GetApiToken po czym ³¹czy sie z API Spotify zeby pobraæ json z artystami lub utworami.
 Json ktory otrzyma³em z API zmapowa³em jako obiekty w pakiecie domain, obiekty te s¹ rownie¿ wykorzystywane do zapisywania danych w mongodb.
 W controllerze wykorzystuje SearchService zeby udostepniæ pobrane dane jako restowy endpoint z ktorego moze korzystaæ Angular, LogsController w taki sam sposób udostepnia logi usera.
+Do logowania aktywnoœci usera uzy³em AOP springa, wychwytuj¹c w klasie UserActionsLogger zapisywanie, przegladanie i usuwanie danych przez usera.
+
 Po stronie Angulara rowniez zmapowa³em json do obiektów w katalogu domain, ca³oœc podzieli³em na komponenty, wyszukiwarkê osobno dla artystów i utworów, ulubionych artystów, ulubione utwory i logi pokazuj¹ce aktywnoœæ usera.
 Stworzylem serwisy ktore ³¹cz¹ sie ze springiem zeby pobraæ/wys³aæ dane i wyœwietliæ je odpowiednio sformatowane. 
 
