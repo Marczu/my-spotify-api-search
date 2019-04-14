@@ -8,7 +8,7 @@ import java.util.List;
 @Data
 public class Artists {
 
-    private List<Items> items;
+    private List<ArtistsItems> items;
 
     public Artists() {
         items = new ArrayList<>();

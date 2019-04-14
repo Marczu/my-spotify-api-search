@@ -41,7 +41,7 @@ public class UserActionsLogger {
         loggerService.saveToLogs(userLog);
     }
 
-    @AfterReturning("execution(* com.mejner.myspotifyapisearch.controller.FavoritesController.removeFavoriteById(*)) and args(id)")
+    @AfterReturning("execution(* com.mejner.myspotifyapisearch.controller.FavoritesController.removeFavoriteArtistkById(*)) and args(id)")
     private void afterUserRemoveFavoriteTrack(String id) {
         UserActionsLogs userLog = new UserActionsLogs();
 

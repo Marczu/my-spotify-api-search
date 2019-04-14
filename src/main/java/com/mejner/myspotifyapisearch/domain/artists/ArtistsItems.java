@@ -9,7 +9,7 @@ import java.util.List;
 
 @Data
 @Document
-public class Items {
+public class ArtistsItems {
 
     @Id
     private String id;
@@ -17,7 +17,7 @@ public class Items {
     private Followers followers;
     private List<Images> images;
 
-    public Items() {
+    public ArtistsItems() {
         images = new ArrayList<>();
     }
 }

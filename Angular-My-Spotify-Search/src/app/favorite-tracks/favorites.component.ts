@@ -3,6 +3,7 @@ import {FavoritesService} from "../service/data/favorites.service";
 import {Items} from "../domain/tracks/Items";
 import {Artists} from "../domain/tracks/Artists";
 import {Router} from "@angular/router";
+import {ArtistsItems} from "../domain/artists/ArtistsItems";
 
 @Component({
   selector: 'app-favorites',
@@ -13,12 +14,13 @@ export class FavoritesComponent implements OnInit {
 
   favoriteTracks: Items[] = [];
 
+
   constructor(private favoriteService: FavoritesService,
               private router: Router) {
   }
 
   ngOnInit() {
-    this.refreshTrackList()
+    this.refreshTrackList();
   }
 
   refreshTrackList() {
@@ -29,6 +31,7 @@ export class FavoritesComponent implements OnInit {
     this.favoriteService.getFavoriteTracksByName().subscribe(
       response => {
         this.favoriteTracks = response
+        console.log(this.favoriteTracks)
       }
     )
   }

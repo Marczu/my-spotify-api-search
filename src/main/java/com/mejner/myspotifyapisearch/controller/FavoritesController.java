@@ -1,7 +1,9 @@
 package com.mejner.myspotifyapisearch.controller;
 
+import com.mejner.myspotifyapisearch.domain.artists.ArtistsItems;
 import com.mejner.myspotifyapisearch.domain.tracks.Items;
-import com.mejner.myspotifyapisearch.service.FavoritesService;
+import com.mejner.myspotifyapisearch.service.FavoriteArtistsService;
+import com.mejner.myspotifyapisearch.service.FavoriteTracksService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,32 +17,51 @@ import org.springframework.web.bind.annotation.*;
 public class FavoritesController {
 
     @Autowired
-    FavoritesService favoritesService;
+    FavoriteTracksService favoriteTracksService;
+
+    @Autowired
+    FavoriteArtistsService favoriteArtistsService;
 
     @PostMapping("/save/track")
     public ResponseEntity<Items> saveFavoriteTrack(@RequestBody Items track){
-        favoritesService.saveFavoriteTrack(track);
+        favoriteTracksService.saveFavoriteTrack(track);
+
+        System.out.println("zapisano utwór " + track.getName());
 
         return new ResponseEntity<>(track, HttpStatus.OK);
     }
 
     @PostMapping("/save/artist")
-    public ResponseEntity<com.mejner.myspotifyapisearch.domain.artists.Items> saveFavoriteArtist(@RequestBody com.mejner.myspotifyapisearch.domain.artists.Items items){
+    public ResponseEntity<ArtistsItems> saveFavoriteArtist(@RequestBody ArtistsItems items){
 
-        System.out.println("zapisano " + items.getName());
+        favoriteArtistsService.saveFavoriteArtist(items);
+        System.out.println("zapisano artyste " + items.getName());
         return new ResponseEntity<>(items, HttpStatus.OK);
     }
 
     @GetMapping("/tracks")
     public ResponseEntity<Iterable<Items>> getFavoriteTracks(){
-        Iterable<Items> tracks = favoritesService.findAllFavorites();
+        Iterable<Items> tracks = favoriteTracksService.findTracksFavorites();
 
         return new ResponseEntity<>(tracks, HttpStatus.OK);
     }
 
+    @GetMapping("/artists")
+    public ResponseEntity<Iterable<ArtistsItems>> getFavoriteArtists(){
+//        Iterable<ArtistsItems> tracks = favoriteTracksService.findTracksFavorites();
+        Iterable<ArtistsItems> artists = favoriteArtistsService.findArtistsFavorites();
+        return new ResponseEntity<>(artists, HttpStatus.OK);
+    }
+
     @DeleteMapping("/delete/tracks/{id}")
-    public ResponseEntity removeFavoriteById(@PathVariable String id){
-        favoritesService.removeFavoriteById(id);
+    public ResponseEntity removeFavoriteTrackById(@PathVariable String id){
+        favoriteTracksService.removeFavoriteTrackById(id);
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @DeleteMapping("/delete/artists/{id}")
+    public ResponseEntity removeFavoriteArtistById(@PathVariable String id){
+        favoriteArtistsService.removeFavoriteArtistById(id);
         return new ResponseEntity(HttpStatus.OK);
     }
 }

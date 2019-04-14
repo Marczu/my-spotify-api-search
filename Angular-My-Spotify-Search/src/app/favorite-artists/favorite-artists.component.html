@@ -1,0 +1,39 @@
+<div class="container">
+  <h1 class="display-3 mt-2 mb-5 text-center">Lista ulubionych artystów</h1>
+</div>
+
+<div class="container">
+  <table class="table" *ngIf="favoriteArtists.length > 0; else noFavoriteTracks">
+    <thead>
+    <tr>
+      <th>Obrazek</th>
+      <th>Wykonawca</th>
+      <th>Obserwujących</th>
+      <th>Usuń z ulubionych</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let artist of favoriteArtists">
+      <td *ngIf="artist.images.length > 0; else noImageFound"><img src="{{artist.images[1].url}}"></td>
+      <ng-template #noImageFound>
+        <td><img src="https://www.freeiconspng.com/uploads/no-image-icon-6.png"></td>
+      </ng-template>
+      <td>{{artist.name}}</td>
+      <td>{{artist.followers.total}}</td>
+      <td>
+        <button class=" btn btn-danger" (click)="removeFavoriteArtistkById(artist.id)">Usuń z ulubionych</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+</div>
+<ng-template #noFavoriteTracks>
+  <div class="container">
+    <div class="row justify-content-center">
+      <h3 class="text-warning text-center col-12">Twoja lista ulubionych Artystów jest pusta.</h3>
+      <button (click)="goToSearch()" class="btn btn-outline-success">Dodaj ulubione utwory</button>
+    </div>
+  </div>
+</ng-template>
+
