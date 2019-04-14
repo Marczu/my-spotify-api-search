@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 @RestController
 @RequestMapping("/api/search")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin()
 public class SearchRestController {
 
     @Autowired
