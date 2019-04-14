@@ -1,0 +1,14 @@
+w katalogu my-spotify-api-search/Angular-My-Spotify-Search jest aplikacja Angulara
+
+W projekcie uzy³em Spring oraz Angular. Spring ³¹czy sie z API Spotify, zapisuje ulubionych artystów, utwory i aktywnoœæ usera w bazie mongodb, oraz udostepnia restowe endpointy z wszystkimi danymi dla Angulara, ktory wyœwietla dane w przegl¹darce. 
+Dla pobrania Tokena stworzylem do tego klase GetApiToken w ktorej wykorzysta³em RestTemplate do po³aczenia sie z Api Spotify.
+Klasa SearchService w pakiecie service wykorzystuje GetApiToken po czym ³¹czy sie z API Spotify zeby pobraæ json z artystami lub utworami.
+Json ktory otrzyma³em z API zmapowa³em jako obiekty w pakiecie domain, obiekty te s¹ rownie¿ wykorzystywane do zapisywania danych w mongodb.
+W controllerze wykorzystuje SearchService zeby udostepniæ pobrane dane jako restowy endpoint z ktorego moze korzystaæ Angular, LogsController w taki sam sposób udostepnia logi usera.
+Po stronie Angulara rowniez zmapowa³em json do obiektów w katalogu domain, ca³oœc podzieli³em na komponenty, wyszukiwarkê osobno dla artystów i utworów, ulubionych artystów, ulubione utwory i logi pokazuj¹ce aktywnoœæ usera.
+Stworzylem serwisy ktore ³¹cz¹ sie ze springiem zeby pobraæ/wys³aæ dane i wyœwietliæ je odpowiednio zformatowane. 
+
+Przed wys³aniem wyszytko sprawdzilem tak ze napewno bedzie dzia³aæ :) 
+czêœæ angularow¹ mozna odpaliæ npm install po czym ng serve
+
+
