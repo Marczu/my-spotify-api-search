@@ -41,7 +41,17 @@ public class UserActionsLogger {
         loggerService.saveToLogs(userLog);
     }
 
-    @AfterReturning("execution(* com.mejner.myspotifyapisearch.controller.FavoritesController.removeFavoriteArtistkById(*)) and args(id)")
+    @AfterReturning("execution(* com.mejner.myspotifyapisearch.controller.FavoritesController.removeFavoriteArtistById(*)) and args(id)")
+    private void afterUserRemoveFavoriteArtist(String id) {
+        UserActionsLogs userLog = new UserActionsLogs();
+
+        userLog.setLog("Użytkownik usunął Artyste o id: " + id + " z listy ulubionych");
+        userLog.setTimestamp(new Date());
+
+        loggerService.saveToLogs(userLog);
+    }
+
+    @AfterReturning("execution(* com.mejner.myspotifyapisearch.controller.FavoritesController.removeFavoriteTrackById(*)) and args(id)")
     private void afterUserRemoveFavoriteTrack(String id) {
         UserActionsLogs userLog = new UserActionsLogs();
 
