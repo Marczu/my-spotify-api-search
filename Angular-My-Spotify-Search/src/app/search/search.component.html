@@ -18,8 +18,8 @@
 
         <div class="col-sm-5">
           <div class="form-group">
-            <input type="artists" class="form-control" id="artists" name="artists"
-                   placeholder="Wprowadź nazwe wyszukiwanego wykonawcy">
+            <input type="text" class="form-control" id="artists" name="artists"
+                   placeholder="Wprowadź nazwe wyszukiwanego wykonawcy" [(ngModel)]="artistName">
           </div>
         </div>
         <div class="col-sm-4">
@@ -33,8 +33,9 @@
   </div>
 </div>
 
+<!--Wyszukiwanie po utworach-->
 <div class="container-fluid">
-  <table class="table" *ngIf="searchResult">
+  <table class="table" *ngIf="tracksSearchResult">
     <thead>
     <tr>
       <th>Obrazek</th>
@@ -46,14 +47,41 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let result of searchResult">
-      <td><img src="{{result.album.images[2].url}}"></td>
-      <td>{{result.name}}</td>
-      <td>{{result.album.name}}</td>
-      <td>{{getArtistsNames(result.artists)}}</td>
-      <td>{{msToMinutes(result.duration_ms)}}</td>
+    <tr *ngFor="let track of tracksSearchResult">
+      <td><img src="{{track.album.images[2].url}}"></td>
+      <td>{{track.name}}</td>
+      <td>{{track.album.name}}</td>
+      <td>{{getArtistsNames(track.artists)}}</td>
+      <td>{{msToMinutes(track.duration_ms)}}</td>
       <td>
-        <button class=" btn btn-success" (click)="addToFavorites(result)">Dodaj Do ulubionych</button>
+        <button class=" btn btn-success" (click)="addTrackToFavorites(track)">Dodaj do ulubionych</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<!--Wyszukiwanie po wykonawcach-->
+<div class="container">
+  <table class="table" *ngIf="artistsSearchResult">
+    <thead>
+    <tr>
+      <th>Obrazek</th>
+      <th>Wykonawca</th>
+      <th>Obserwujących</th>
+      <th>Ulubiony</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let artist of artistsSearchResult">
+      <td *ngIf="artist.images.length > 0; else noImageFound"><img src="{{artist.images[1].url}}"></td>
+      <ng-template #noImageFound>
+        <td><img src="https://www.freeiconspng.com/uploads/no-image-icon-6.png"></td>
+      </ng-template>
+      <td>{{artist.name}}</td>
+      <td>{{artist.followers.total}}</td>
+      <td>
+        <button class=" btn btn-success" (click)="addArtistToFavorites(artist)">Dodaj do ulubionych</button>
       </td>
     </tr>
     </tbody>

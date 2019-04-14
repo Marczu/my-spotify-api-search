@@ -70,7 +70,7 @@ public class SearchService {
 
         try {
             ResponseEntity<ArtistsSearchResult> response =
-                    restTemplate.exchange(ApiConstants.SPOTIFY_SEARCH_URL + name + "&type=artist&market=US&limit=50", HttpMethod.GET,
+                    restTemplate.exchange(ApiConstants.SPOTIFY_SEARCH_URL + name + "&type=artist&market=US&limit=20", HttpMethod.GET,
                             entity, ArtistsSearchResult.class);
 
             /*For testing*/

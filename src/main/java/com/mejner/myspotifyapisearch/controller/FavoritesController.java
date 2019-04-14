@@ -26,6 +26,8 @@ public class FavoritesController {
 
     @PostMapping("/save/artist")
     public ResponseEntity<com.mejner.myspotifyapisearch.domain.artists.Items> saveFavoriteArtist(@RequestBody com.mejner.myspotifyapisearch.domain.artists.Items items){
+
+        System.out.println("zapisano " + items.getName());
         return new ResponseEntity<>(items, HttpStatus.OK);
     }
 

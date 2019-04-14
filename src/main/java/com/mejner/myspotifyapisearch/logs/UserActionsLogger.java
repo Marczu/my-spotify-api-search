@@ -49,10 +49,6 @@ public class UserActionsLogger {
         userLog.setTimestamp(new Date());
 
         loggerService.saveToLogs(userLog);
-
-        loggerService.getAllLogs().forEach(log -> {
-            System.out.println(log.getTimestamp() + " " + log.getLog());
-        });
     }
 
 

@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {SearchService} from "../service/data/search.service";
 import {Items} from "../domain/tracks/Items";
+import {ArtistsItems} from "../domain/artists/ArtistsItems";
 import {Artists} from "../domain/tracks/Artists";
 import {FavoritesService} from "../service/data/favorites.service";
 
@@ -11,8 +12,10 @@ import {FavoritesService} from "../service/data/favorites.service";
 })
 export class SearchComponent implements OnInit {
 
-  searchResult: Items[] = null;
+  tracksSearchResult: Items[] = null;
+  artistsSearchResult: ArtistsItems[] = null;
   tracksName: string = "";
+  artistName: string = "";
 
   constructor(private searchService: SearchService,
               private favoritesService: FavoritesService) {
@@ -40,13 +43,22 @@ export class SearchComponent implements OnInit {
   searchForTracks() {
     this.searchService.getTracksByName(this.tracksName).subscribe(
       response => {
-        this.searchResult = response.items;
-        console.log(this.searchResult)
+        this.tracksSearchResult = response.items;
+        this.artistsSearchResult = null;
       }
     );
   }
 
-  addToFavorites(track: Items) {
+  searchForArtists() {
+    this.searchService.getArtistsByName(this.artistName).subscribe(
+      response => {
+        this.artistsSearchResult = response.items;
+        this.tracksSearchResult = null;
+      }
+    );
+  }
+
+  addTrackToFavorites(track: Items) {
     console.log(track);
     this.favoritesService.saveFavoriteTrack(track).subscribe()
   }
@@ -59,5 +71,11 @@ export class SearchComponent implements OnInit {
     let resultSeconds = (seconds < 10) ? "0" + seconds : seconds;
 
     return resultMinutes + ":" + resultSeconds;
+  }
+
+
+  addArtistToFavorites(artist: ArtistsItems) {
+    console.log(artist);
+    this.favoritesService.saveFavoriteArtist(artist).subscribe()
   }
 }
