@@ -6,7 +6,7 @@ Klasa SearchService w pakiecie service wykorzystuje GetApiToken po czym ³¹czy si
 Json ktory otrzyma³em z API zmapowa³em jako obiekty w pakiecie domain, obiekty te s¹ rownie¿ wykorzystywane do zapisywania danych w mongodb.
 W controllerze wykorzystuje SearchService zeby udostepniæ pobrane dane jako restowy endpoint z ktorego moze korzystaæ Angular, LogsController w taki sam sposób udostepnia logi usera.
 Po stronie Angulara rowniez zmapowa³em json do obiektów w katalogu domain, ca³oœc podzieli³em na komponenty, wyszukiwarkê osobno dla artystów i utworów, ulubionych artystów, ulubione utwory i logi pokazuj¹ce aktywnoœæ usera.
-Stworzylem serwisy ktore ³¹cz¹ sie ze springiem zeby pobraæ/wys³aæ dane i wyœwietliæ je odpowiednio zformatowane. 
+Stworzylem serwisy ktore ³¹cz¹ sie ze springiem zeby pobraæ/wys³aæ dane i wyœwietliæ je odpowiednio sformatowane. 
 
 Przed wys³aniem wyszytko sprawdzilem tak ze napewno bedzie dzia³aæ :) 
 czêœæ angularow¹ mozna odpaliæ npm install po czym ng serve
