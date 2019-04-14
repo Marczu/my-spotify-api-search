@@ -10,6 +10,7 @@ import {HttpClientModule} from "@angular/common/http";
 import { FavoritesComponent } from './favorites/favorites.component';
 import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
+import { LogsComponent } from './logs/logs.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { HomeComponent } from './home/home.component';
     SearchComponent,
     FavoritesComponent,
     HeaderComponent,
-    HomeComponent
+    HomeComponent,
+    LogsComponent
   ],
   imports: [
     BrowserModule,

@@ -21,7 +21,6 @@ public class FavoritesController {
     public ResponseEntity<Items> saveFavoriteTrack(@RequestBody Items track){
         favoritesService.saveFavoriteTrack(track);
 
-        favoritesService.findAllFavorites().forEach(item -> System.out.println("Wynik to: " + item.getAlbum()) );
         return new ResponseEntity<>(track, HttpStatus.OK);
     }
 
@@ -32,7 +31,6 @@ public class FavoritesController {
 
     @GetMapping("/tracks")
     public ResponseEntity<Iterable<Items>> getFavoriteTracks(){
-
         Iterable<Items> tracks = favoritesService.findAllFavorites();
 
         return new ResponseEntity<>(tracks, HttpStatus.OK);
